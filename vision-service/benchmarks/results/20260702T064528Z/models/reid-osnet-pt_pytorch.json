@@ -1,0 +1,20 @@
+{
+  "model_id": "reid-osnet-pt",
+  "backend": "pytorch",
+  "family": "reid",
+  "accuracy": {
+    "synthetic": {
+      "rank1": 0.0,
+      "rank5": 0.06493506493506493,
+      "mAP": 0.028134419407551545
+    }
+  },
+  "speed": {
+    "p50_ms": 0.26219999995191756,
+    "p95_ms": 0.3866350000180317,
+    "p99_ms": 0.48858199969345123,
+    "mean_ms": 0.2782019999813201,
+    "throughput_ips": 3594.5104638613134,
+    "vram_peak_mb": null
+  }
+}

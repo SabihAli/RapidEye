@@ -1,0 +1,22 @@
+{
+  "model_id": "face-det-scrfd",
+  "backend": "pytorch",
+  "family": "face_det",
+  "accuracy": {
+    "synthetic": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "tp": 0.0,
+      "fp": 20.0,
+      "fn": 20.0
+    }
+  },
+  "speed": {
+    "p50_ms": 0.22764999994251411,
+    "p95_ms": 0.34043500018015,
+    "p99_ms": 1.0285479998083236,
+    "mean_ms": 0.2608785000052194,
+    "throughput_ips": 3833.2020460865615,
+    "vram_peak_mb": null
+  }
+}

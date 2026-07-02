@@ -1,0 +1,119 @@
+# Model registry — maps benchmark IDs to adapter classes (see bench/adapters/)
+# checkpoint_uri and weights are filled when models are integrated.
+
+models:
+  # --- Body ReID (§5) ---
+  reid-osnet-pt:
+    family: reid
+    name: OSNet
+    adapter: bench.adapters.stub.StubReIDAdapter
+    task: embedding
+    input_size: [256, 128]
+    embedding_dim: 512
+  reid-fastreid-pt:
+    family: reid
+    name: FastReID
+    adapter: bench.adapters.stub.StubReIDAdapter
+    task: embedding
+    input_size: [256, 128]
+    embedding_dim: 512
+
+  # --- Face detection (§7) ---
+  face-det-scrfd:
+    family: face_det
+    name: SCRFD
+    adapter: bench.adapters.stub.StubFaceDetAdapter
+    task: detection
+    input_size: [640, 640]
+  face-det-yolov5face:
+    family: face_det
+    name: YOLOv5-face
+    adapter: bench.adapters.stub.StubFaceDetAdapter
+    task: detection
+    input_size: [640, 640]
+
+  # --- Face embeddings (§8.1) ---
+  face-emb-cosface:
+    family: face_emb
+    name: CosFace
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+    input_size: [112, 112]
+    embedding_dim: 512
+  face-emb-magface:
+    family: face_emb
+    name: MagFace
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+  face-emb-adaface:
+    family: face_emb
+    name: AdaFace
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+  face-emb-elasticface:
+    family: face_emb
+    name: ElasticFace
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+  face-emb-mobileface:
+    family: face_emb
+    name: MobileFace
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+  face-emb-edgeface:
+    family: face_emb
+    name: EdgeFace
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+  face-emb-pocketnet:
+    family: face_emb
+    name: PocketNet
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+  face-emb-mixfacenet:
+    family: face_emb
+    name: MixFaceNet
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+  face-emb-shufflefacenet:
+    family: face_emb
+    name: ShuffleFaceNet
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+
+  # --- LFN unified (§8.4) ---
+  face-lfn-unified:
+    family: face_unified
+    name: LightFaceNetwork
+    adapter: bench.adapters.stub.StubLFNUnifiedAdapter
+    task: unified
+    paper: https://link.springer.com/article/10.1007/s42452-025-08004-y
+  face-lfn-det:
+    family: face_det
+    name: LFN-det
+    adapter: bench.adapters.stub.StubFaceDetAdapter
+    task: detection
+  face-lfn-emb:
+    family: face_emb
+    name: LFN-emb
+    adapter: bench.adapters.stub.StubFaceEmbAdapter
+    task: embedding
+
+pipelines:
+  # --- Body ReID (§9.1) ---
+  pipe-body-01: {detector: yolov11m_person, embedder: reid-osnet-pt, tracker: bytetrack}
+  pipe-body-02: {detector: yolov11m_person, embedder: reid-osnet-pt, tracker: botsort}
+  pipe-body-03: {detector: yolov11m_person, embedder: reid-osnet-pt, tracker: sort}
+  pipe-body-04: {detector: yolov11m_person, embedder: reid-fastreid-pt, tracker: bytetrack}
+  pipe-body-05: {detector: yolov11m_person, embedder: reid-fastreid-pt, tracker: botsort}
+  pipe-body-06: {detector: yolov11m_person, embedder: reid-fastreid-pt, tracker: sort}
+
+systems:
+  sys-micro-track:
+    name: MICRO-TRACK
+    paper: https://arxiv.org/html/2409.03879v1
+    adapter: bench.adapters.stub.StubSystemAdapter
+  sys-aicity9:
+    name: AI City Challenge 9th
+    paper: https://arxiv.org/html/2508.13564v1
+    adapter: bench.adapters.stub.StubSystemAdapter

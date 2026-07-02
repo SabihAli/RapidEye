@@ -1,0 +1,20 @@
+# Vision-service benchmark harness — install in .venv-bench (see TEST.md §2.2)
+numpy<2
+opencv-python-headless
+pillow
+pyyaml
+pandas
+matplotlib
+seaborn
+tqdm
+scikit-learn
+scipy
+filterpy
+lap
+tabulate
+pytest
+pytest-cov
+jinja2
+
+# GPU stack (install separately per TEST.md §2.7–2.10):
+# torch, torchvision, onnxruntime-gpu, onnx, onnxsim, nvidia-tensorrt

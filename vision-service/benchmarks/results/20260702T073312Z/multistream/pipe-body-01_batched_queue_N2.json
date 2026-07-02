@@ -1,0 +1,28 @@
+{
+  "pipeline_id": "pipe-body-01",
+  "scheduler_mode": "batched_queue",
+  "num_streams": 2,
+  "duration_sec": 2.0,
+  "fps_per_stream": {
+    "0": 56.0,
+    "1": 56.0
+  },
+  "min_fps": 56.0,
+  "p95_latency_ms": 89.77440499966178,
+  "frame_drop_rate_pct": 75.0,
+  "pass_fps_gate": true,
+  "pass_latency_gate": true,
+  "pass_drop_gate": false,
+  "batching": {
+    "max_batch_size": 8,
+    "flush_timeout_ms": 15,
+    "max_queue_depth": 8,
+    "total_batches": 28,
+    "mean_batch_size": 8.0,
+    "p95_batch_size": 8.0,
+    "mean_queue_depth": 4.5,
+    "drops_on_overflow": 0,
+    "p95_inference_ms": 0.4535349997695446,
+    "mean_inference_ms": 0.4599464286262186
+  }
+}

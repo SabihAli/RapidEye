@@ -1,0 +1,76 @@
+# Default benchmark configuration — see TEST.md
+
+run:
+  seed: 42
+  warmup_iterations: 100
+  measure_iterations: 1000
+  multistream_duration_sec: 300
+  omp_num_threads: 1
+
+hardware:
+  reference_gpu: "NVIDIA GeForce RTX 3090"
+  reference_vram_gb: 24
+
+selection_gates:
+  min_fps_per_stream_at_n4: 15
+  max_p95_latency_ms: 500
+  max_frame_drop_rate_pct: 5
+  max_int8_accuracy_drop_pct: 2
+  max_relative_accuracy_gap_pct: 5
+
+backends:
+  - pytorch
+  - onnx
+  - trt_fp16
+  - trt_int8
+
+multistream:
+  # round_robin: one frame per inference (batch=1)
+  # batched_queue: shared model + dynamic batching queue (production-like)
+  mode: round_robin
+  stream_counts: [1, 2, 4, 6, 8, 10, 12, 16, 20, 24]
+  resolution: [1920, 1080]
+  target_fps: 20
+  batching:
+    max_batch_size: 8
+    flush_timeout_ms: 15
+    max_queue_depth: 64
+
+input_sizes:
+  body_reid: [256, 128]
+  face_det: [640, 640]
+  face_emb: [112, 112]
+
+phases:
+  T0:
+    description: "Harness + public/synthetic sanity"
+    runners: [verify, isolated]
+    datasets: [synthetic]
+    models: [reid-osnet-pt, face-det-scrfd, face-emb-cosface]
+    backends: [pytorch]
+  T1:
+    description: "Full isolated model matrix"
+    runners: [isolated]
+    datasets: [synthetic, market1501, lfw]
+    backends: [pytorch, onnx, trt_fp16, trt_int8]
+  T2:
+    description: "End-to-end pipelines"
+    runners: [pipeline]
+    datasets: [synthetic_stream]
+  T3:
+    description: "Multi-stream throughput"
+    runners: [multistream]
+    stream_counts: [1, 2, 4, 6, 8, 10, 12, 16, 20, 24]
+  T4:
+    description: "System-level ReID approaches"
+    runners: [system]
+    systems: [sys-micro-track, sys-aicity9]
+  T5:
+    description: "RapidEye domain datasets"
+    datasets: [rapideye-reid, rapideye-face, rapideye-stream]
+  T6:
+    description: "gRPC video ingress integration"
+    runners: [grpc_ingress]
+
+face_pipeline_phase1_trackers: [bytetrack]
+face_pipeline_phase2_trackers: [bytetrack, botsort, sort]

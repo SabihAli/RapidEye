@@ -1,0 +1,20 @@
+{
+  "model_id": "face-emb-cosface",
+  "backend": "pytorch",
+  "family": "face_emb",
+  "accuracy": {
+    "synthetic": {
+      "EER": 0.5,
+      "TAR@FAR0.001": 0.0,
+      "TAR@FAR0.0001": 0.0
+    }
+  },
+  "speed": {
+    "p50_ms": 0.264399999878151,
+    "p95_ms": 0.413125000045511,
+    "p99_ms": 0.6849539999029711,
+    "mean_ms": 0.2943680000066706,
+    "throughput_ips": 3397.108381268817,
+    "vram_peak_mb": null
+  }
+}

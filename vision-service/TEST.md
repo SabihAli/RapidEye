@@ -241,6 +241,8 @@ pip install -r benchmarks/requirements-bench.txt
 
 Install **model-specific** packages as adapters are added (FastReID, ByteTrack, SCRFD, etc.). Record each in `env.lock`.
 
+**Benchmark harness:** implementation lives in [`benchmarks/`](benchmarks/). See [`benchmarks/README.md`](benchmarks/README.md) for CLI usage, phases, and result visualization.
+
 #### Step 10 — TensorRT Python bindings
 
 ```bash
@@ -685,7 +687,25 @@ Simulates production load: multiple independent camera feeds on **one GPU**, mat
 | Decode | NVDEC via FFmpeg on RTX 3090 — include in timing |
 | Stream sources | Distinct clips from `RAPIDEYE-STREAM` (loop if shorter than test duration) |
 
-**Scheduler model:** Round-robin frame processing across streams (no stream priority unless testing priority mode).
+**Scheduler models** (config `multistream.mode` or `--mode`):
+
+| Mode | Behavior |
+|------|----------|
+| `round_robin` | One shared model; one frame per inference (`batch=1`). Default. |
+| `batched_queue` | One shared model; frames enqueued per stream, flushed when `max_batch_size` or `flush_timeout_ms` is reached. |
+
+**Round-robin** (`round_robin`): frame processing rotates across streams with batch=1 inference.
+
+**Batched queue** (`batched_queue`): matches production worker design — single model weights, dynamic batching via `multistream.batching` in `config/default.yaml`:
+
+```yaml
+batching:
+  max_batch_size: 8
+  flush_timeout_ms: 15
+  max_queue_depth: 64
+```
+
+Results include `scheduler_mode` and `batching` stats (`mean_batch_size`, `p95_batch_size`, queue depth).
 
 ### 10.2 Test matrix
 
