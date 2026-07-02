@@ -1,0 +1,66 @@
+# Dataset manifests — point roots to local paths after download/compilation.
+
+datasets:
+  synthetic:
+    id: synthetic
+    type: bench.datasets.synthetic.SyntheticReIDFaceDataset
+    num_identities: 50
+    images_per_identity: 10
+    seed: 42
+
+  synthetic_stream:
+    id: synthetic_stream
+    type: bench.datasets.synthetic.SyntheticStreamDataset
+    num_clips: 4
+    frames_per_clip: 300
+    fps: 20
+    resolution: [1920, 1080]
+
+  market1501:
+    id: market1501
+    type: bench.datasets.manifest.ManifestDataset
+    root: datasets/market1501
+    layout: market1501
+    enabled: false  # set true when downloaded
+
+  lfw:
+    id: lfw
+    type: bench.datasets.manifest.ManifestDataset
+    root: datasets/lfw
+    layout: lfw_pairs
+    enabled: false
+
+  wider_face:
+    id: wider_face
+    type: bench.datasets.manifest.ManifestDataset
+    root: datasets/wider_face
+    layout: wider_face
+    enabled: false
+
+  rapideye-reid:
+    id: rapideye-reid
+    type: bench.datasets.manifest.ManifestDataset
+    root: datasets/rapideye-reid
+    layout: rapideye_reid
+    enabled: false
+
+  rapideye-face:
+    id: rapideye-face
+    type: bench.datasets.manifest.ManifestDataset
+    root: datasets/rapideye-face
+    layout: rapideye_face
+    enabled: false
+
+  rapideye-stream:
+    id: rapideye-stream
+    type: bench.datasets.manifest.ManifestDataset
+    root: datasets/rapideye-stream
+    layout: rapideye_stream
+    enabled: false
+
+  rapideye-calib:
+    id: rapideye-calib
+    type: bench.datasets.manifest.ManifestDataset
+    root: datasets/rapideye-calib
+    layout: rapideye_calib
+    enabled: false
