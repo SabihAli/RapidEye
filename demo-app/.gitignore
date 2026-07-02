@@ -1,0 +1,33 @@
+# Environment
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Node
+web/node_modules/
+web/dist/
+
+# Runtime data
+data/models/*
+!data/models/.gitkeep
+data/zones/*
+!data/zones/.gitkeep
+data/recordings/*
+!data/recordings/.gitkeep
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
