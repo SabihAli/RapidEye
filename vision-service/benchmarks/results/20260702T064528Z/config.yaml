@@ -1,0 +1,24 @@
+environment:
+  captured_at: '2026-07-02T06:45:28.196040+00:00'
+  python: 3.10.19 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 16:41:31) [MSC
+    v.1929 64 bit (AMD64)]
+  platform: Windows-10-10.0.26200-SP0
+  machine: AMD64
+  torch: null
+  onnxruntime: null
+  tensorrt: null
+  git_commit: 72215ce5f82f65da21f625d67b701e49b99a2bea
+  gpu: null
+phase: T0
+description: Harness + public/synthetic sanity
+runners:
+- verify
+- isolated
+datasets:
+- synthetic
+models:
+- reid-osnet-pt
+- face-det-scrfd
+- face-emb-cosface
+backends:
+- pytorch
